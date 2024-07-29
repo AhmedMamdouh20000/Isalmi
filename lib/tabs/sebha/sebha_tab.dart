@@ -20,7 +20,7 @@ class _SebhaTabState extends State<SebhaTab> {
         child: Column(
           children: [
             SizedBox(
-              height: 10,
+              height: MediaQuery.of(context).size.height * 0.02,
             ),
             Image.asset(
               'assets/images/head_sebha_logo.png',
@@ -28,7 +28,7 @@ class _SebhaTabState extends State<SebhaTab> {
             SizedBox(
               height: 10,
             ),
-            GestureDetector(
+            InkWell(
               onTap: () {
                 SebhaNumber();
                 counter++;
@@ -38,7 +38,6 @@ class _SebhaTabState extends State<SebhaTab> {
                 angle: turns,
                 alignment: Alignment.topCenter,
                 origin: Offset(180, 80),
-                // transform: Matrix4.rotationZ(0.2),
                 child: Image.asset(
                   'assets/images/body_sebha_logo.png',
                 ),
@@ -84,6 +83,29 @@ class _SebhaTabState extends State<SebhaTab> {
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25),
+                color: AppTheme.lightPrimary.withOpacity(0.6),
+              ),
+              height: 51,
+              width: 137,
+              child: Center(
+                  child: TextButton(
+                onPressed: () {
+                  counter = 0;
+                  tasbeh = 'سبحان الله';
+                  setState(() {});
+                },
+                child: Text(
+                  'تصفير',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+              )),
             ),
           ],
         ),
