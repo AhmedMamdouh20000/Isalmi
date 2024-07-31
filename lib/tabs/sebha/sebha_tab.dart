@@ -28,7 +28,7 @@ class _SebhaTabState extends State<SebhaTab> {
             SizedBox(
               height: 10,
             ),
-            InkWell(
+            GestureDetector(
               onTap: () {
                 SebhaNumber();
                 counter++;

@@ -1,23 +1,24 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:islamic/app_theme.dart';
 import 'package:islamic/tabs/quran/quran_tab.dart';
 
-class SuraDetailsScreen extends StatelessWidget {
+class SuraDetailsScreen extends StatefulWidget {
   static const String routeName = '/sura-details';
 
   @override
+  State<SuraDetailsScreen> createState() => _SuraDetailsScreenState();
+}
+
+class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
+  List<String> ayat = [];
+  late SuraDetailsArgs args;
+  @override
   Widget build(BuildContext context) {
-    List<String> ayat = [
-      ' بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ ',
-      ' الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',
-      ' الرَّحْمَنِ الرَّحِيمِ',
-      ' مَالِكِ يَوْمِ الدِّينِ',
-      ' إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ',
-      ' اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ',
-      ' صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّين',
-    ];
-    SuraDetailsArgs args =
-        ModalRoute.of(context)!.settings.arguments as SuraDetailsArgs;
+    args = ModalRoute.of(context)!.settings.arguments as SuraDetailsArgs;
+    loadSuraFile();
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -27,7 +28,7 @@ class SuraDetailsScreen extends StatelessWidget {
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(args.suraName),
+          title: Text('سورة ${args.suraName}'),
         ),
         body: Container(
           padding: EdgeInsets.all(24),
@@ -38,16 +39,25 @@ class SuraDetailsScreen extends StatelessWidget {
             color: AppTheme.white,
             borderRadius: BorderRadius.circular(30),
           ),
-          child: ListView.builder(
-            itemBuilder: (_, index) => Text(
-              ayat[index],
-              style: Theme.of(context).textTheme.titleLarge,
-              textAlign: TextAlign.center,
-            ),
-            itemCount: ayat.length,
-          ),
+          child: ayat.isEmpty
+              ? Center(child: CircularProgressIndicator())
+              : ListView.builder(
+                  itemBuilder: (_, index) => Text(
+                    ayat[index],
+                    style: Theme.of(context).textTheme.titleLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                  itemCount: ayat.length,
+                ),
         ),
       ),
     );
+  }
+
+  Future<void> loadSuraFile() async {
+    String sura =
+        await rootBundle.loadString('assets/SuraFile/${args.index + 1}.txt');
+    ayat = sura.split('\r\n');
+    setState(() {});
   }
 }
