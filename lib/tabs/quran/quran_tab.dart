@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:islamic/app_theme.dart';
 import 'package:islamic/tabs/quran/sura_details_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QuranTab extends StatelessWidget {
   List<String> suraNames = [
@@ -139,23 +140,9 @@ class QuranTab extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text(
-              'عدد الايات ',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            Container(
-              width: 4,
-              height: 30,
-              color: AppTheme.lightPrimary,
-            ),
-            Text(
-              'اسم الصورة',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-          ],
+        Text(
+          'اسماء الصور',
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         Container(
           height: 3,
@@ -173,7 +160,6 @@ class QuranTab extends StatelessWidget {
             itemBuilder: (_, index) => Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Divider(),
                 InkWell(
                   onTap: () => Navigator.of(context).pushNamed(
                     SuraDetailsScreen.routeName,

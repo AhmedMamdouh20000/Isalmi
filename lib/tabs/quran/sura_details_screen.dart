@@ -1,9 +1,12 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islamic/app_theme.dart';
 import 'package:islamic/tabs/quran/quran_tab.dart';
+import 'package:islamic/tabs/settings/settings.dart';
+import 'package:provider/provider.dart';
 
 class SuraDetailsScreen extends StatefulWidget {
   static const String routeName = '/sura-details';
@@ -17,18 +20,34 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
   late SuraDetailsArgs args;
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     args = ModalRoute.of(context)!.settings.arguments as SuraDetailsArgs;
-    loadSuraFile();
+    if (ayat.isEmpty) {
+      loadSuraFile();
+    }
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/default_bg.png'),
-          fit: BoxFit.fill,
+          image: AssetImage(settingsProvider.themeMode == ThemeMode.light
+              ? 'assets/images/default_bg.png'
+              : 'assets/images/dark_bg.png'),
+          fit: BoxFit.cover,
         ),
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('سورة ${args.suraName}'),
+          title: Row(
+            children: [
+              Text(
+                '(عدد الايات ${ayat.length})',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              Container(
+                width: 10,
+              ),
+              Text('سورة ${args.suraName}'),
+            ],
+          ),
         ),
         body: Container(
           padding: EdgeInsets.all(24),
@@ -36,7 +55,10 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
               vertical: MediaQuery.of(context).size.height * 0.1,
               horizontal: MediaQuery.of(context).size.width * 0.07),
           decoration: BoxDecoration(
-            color: AppTheme.white,
+            color: Provider.of<SettingsProvider>(context).themeMode ==
+                    ThemeMode.light
+                ? AppTheme.white
+                : AppTheme.darkPrimary,
             borderRadius: BorderRadius.circular(30),
           ),
           child: ayat.isEmpty

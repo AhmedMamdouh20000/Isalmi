@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:islamic/app_theme.dart';
 
 class SebhaTab extends StatefulWidget {
@@ -20,38 +23,41 @@ class _SebhaTabState extends State<SebhaTab> {
         child: Column(
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.02,
-            ),
-            Image.asset(
-              'assets/images/head_sebha_logo.png',
+              height: MediaQuery.of(context).size.height * 0.45,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Positioned(
+                    top: MediaQuery.of(context).size.height * 0.01,
+                    child: Image.asset(
+                      'assets/images/head_sebha_logo.png',
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      SebhaNumber();
+                      counter++;
+                      setState(() {});
+                    },
+                    child: Transform.rotate(
+                      angle: turns,
+                      child: Image.asset(
+                        'assets/images/body_sebha_logo.png',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
             SizedBox(
               height: 10,
             ),
-            GestureDetector(
-              onTap: () {
-                SebhaNumber();
-                counter++;
-                setState(() {});
-              },
-              child: Transform.rotate(
-                angle: turns,
-                alignment: Alignment.topCenter,
-                origin: Offset(180, 80),
-                child: Image.asset(
-                  'assets/images/body_sebha_logo.png',
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
             Text(
               'عدد التسبيحات',
-              style: Theme.of(context).textTheme.headlineLarge,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
             SizedBox(
-              height: 30,
+              height: 20,
             ),
             Container(
               decoration: BoxDecoration(
@@ -138,6 +144,7 @@ class _SebhaTabState extends State<SebhaTab> {
       tasbeh = 'سبحان الله';
       counter = 0;
     }
+    turns += 360 / 33 * pi;
     setState(() {});
   }
 }
