@@ -12,7 +12,7 @@ class SebhaTab extends StatefulWidget {
 
 class _SebhaTabState extends State<SebhaTab> {
   int counter = 0;
-  double turns = 0.2;
+  double turns = 0;
   String tasbeh = 'سبحان الله';
 
   @override
@@ -28,7 +28,7 @@ class _SebhaTabState extends State<SebhaTab> {
                 alignment: Alignment.center,
                 children: [
                   Positioned(
-                    top: MediaQuery.of(context).size.height * 0.01,
+                    top: MediaQuery.of(context).size.height * 0.04,
                     child: Image.asset(
                       'assets/images/head_sebha_logo.png',
                     ),

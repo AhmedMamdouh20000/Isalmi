@@ -3,6 +3,7 @@ import 'package:islamic/app_theme.dart';
 import 'package:islamic/tabs/hadeath/hadeath.dart';
 import 'package:islamic/tabs/settings/settings.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 
 class HadeathDetailsScreen extends StatelessWidget {
   static const String routeName = 'hadeath-details';
@@ -10,10 +11,13 @@ class HadeathDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Hadeath hadeath = ModalRoute.of(context)!.settings.arguments as Hadeath;
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/default_bg.png'),
+          image: AssetImage(settingsProvider.themeMode == ThemeMode.light
+              ? 'assets/images/default_bg.png'
+              : 'assets/images/dark_bg.png'),
           fit: BoxFit.cover,
         ),
       ),
