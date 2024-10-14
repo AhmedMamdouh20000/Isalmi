@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -9,7 +8,9 @@ class AppTheme {
   static const Color black = Color(0xff242424);
   static const Color gold = Color(0xffFACC1D);
   static ThemeData lightTheme = ThemeData(
-    appBarTheme: AppBarTheme(
+    primaryColor: lightPrimary,
+    appBarTheme: const AppBarTheme(
+      foregroundColor: black,
       titleTextStyle: TextStyle(
         color: black,
         fontSize: 30,
@@ -19,13 +20,16 @@ class AppTheme {
       backgroundColor: Colors.transparent,
     ),
     scaffoldBackgroundColor: Colors.transparent,
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    switchTheme: const SwitchThemeData(
+      trackColor: WidgetStatePropertyAll(lightPrimary),
+    ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: lightPrimary,
       type: BottomNavigationBarType.fixed,
       selectedItemColor: black,
       unselectedItemColor: white,
     ),
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       headlineSmall: TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.w400,
@@ -38,5 +42,39 @@ class AppTheme {
       ),
     ),
   );
-  static ThemeData darkTheme = ThemeData();
+  static ThemeData darkTheme = ThemeData(
+    primaryColor: darkPrimary,
+    appBarTheme: const AppBarTheme(
+      foregroundColor: gold,
+      titleTextStyle: TextStyle(
+        color: white,
+        fontSize: 30,
+        fontWeight: FontWeight.bold,
+      ),
+      centerTitle: true,
+      backgroundColor: Colors.transparent,
+    ),
+    scaffoldBackgroundColor: Colors.transparent,
+    switchTheme: const SwitchThemeData(
+      thumbColor: WidgetStatePropertyAll(white),
+    ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: darkPrimary,
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: gold,
+      unselectedItemColor: white,
+    ),
+    textTheme: const TextTheme(
+      headlineSmall: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.w400,
+        color: white,
+      ),
+      titleLarge: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w400,
+        color: gold,
+      ),
+    ),
+  );
 }

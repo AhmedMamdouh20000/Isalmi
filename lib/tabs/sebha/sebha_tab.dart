@@ -1,58 +1,64 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:islamic/app_theme.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../settings/settings.dart';
 
 class SebhaTab extends StatefulWidget {
+  const SebhaTab({super.key});
+
   @override
   State<SebhaTab> createState() => _SebhaTabState();
 }
 
 class _SebhaTabState extends State<SebhaTab> {
   int counter = 0;
-  double turns = 0.2;
+  double turns = 0;
   String tasbeh = 'سبحان الله';
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
+  return Scaffold(
+      body: SizedBox(
         width: double.infinity,
         child: Column(
           children: [
             SizedBox(
-              height: 10,
-            ),
-            Image.asset(
-              'assets/images/head_sebha_logo.png',
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            GestureDetector(
-              onTap: () {
-                SebhaNumber();
-                counter++;
-                setState(() {});
-              },
-              child: Transform.rotate(
-                angle: turns,
-                alignment: Alignment.topCenter,
-                origin: Offset(180, 80),
-                // transform: Matrix4.rotationZ(0.2),
-                child: Image.asset(
-                  'assets/images/body_sebha_logo.png',
-                ),
+              height: MediaQuery.of(context).size.height * 0.45,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Positioned(
+                    top: MediaQuery.of(context).size.height * 0.015,
+                    child: Image.asset(
+                      'assets/images/head_sebha_logo.png',
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      SebhaNumber();
+                      counter++;
+                      setState(() {});
+                    },
+                    child: Transform.rotate(
+                      angle: turns,
+                      child: Image.asset(
+                        'assets/images/body_sebha_logo.png',
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            SizedBox(
-              height: 30,
-            ),
             Text(
-              'عدد التسبيحات',
-              style: Theme.of(context).textTheme.headlineLarge,
+              AppLocalizations.of(context)!.tasbeh,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
-            SizedBox(
-              height: 30,
+            const SizedBox(
+              height: 20,
             ),
             Container(
               decoration: BoxDecoration(
@@ -68,8 +74,31 @@ class _SebhaTabState extends State<SebhaTab> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
+            ),
+            GestureDetector(
+              onTap: (){
+                SebhaNumber();
+                counter++;
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  color: AppTheme.lightPrimary.withOpacity(0.6),
+                ),
+                height: 51,
+                width: MediaQuery.of(context).size.width * 0.5,
+                child: Center(
+                  child: Text(
+                    tasbeh,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 16,
             ),
             Container(
               decoration: BoxDecoration(
@@ -79,11 +108,17 @@ class _SebhaTabState extends State<SebhaTab> {
               height: 51,
               width: 137,
               child: Center(
+                  child: TextButton(
+                onPressed: () {
+                  counter = 0;
+                  tasbeh = 'سبحان الله';
+                  setState(() {});
+                },
                 child: Text(
-                  tasbeh,
-                  style: Theme.of(context).textTheme.titleLarge,
+                  'تصفير',
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
-              ),
+              )),
             ),
           ],
         ),
@@ -101,7 +136,11 @@ class _SebhaTabState extends State<SebhaTab> {
       counter = 0;
     }
     if (tasbeh == 'الله اكبر ' && counter == 33) {
-      tasbeh = 'سبحان الله';
+      tasbeh = 'اللهم صلى على سيدنا محمد';
+      counter = 0;
+    }
+    if (tasbeh == 'اللهم صلى على سيدنا محمد' && counter == 33) {
+      tasbeh = 'سبحان الله ';
       counter = 33;
     }
     if (tasbeh == 'سبحان الله' && counter == 99) {
@@ -113,9 +152,14 @@ class _SebhaTabState extends State<SebhaTab> {
       counter = 33;
     }
     if (tasbeh == 'الله اكبر ' && counter == 99) {
+      tasbeh = 'اللهم صلى على سيدنا محمد';
+      counter = 33;
+    }
+    if (tasbeh == 'اللهم صلى على سيدنا محمد' && counter == 99) {
       tasbeh = 'سبحان الله';
       counter = 0;
     }
+    turns += 360 / 33 * pi;
     setState(() {});
   }
 }
