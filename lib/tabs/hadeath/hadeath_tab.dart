@@ -1,11 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:islamic/app_theme.dart';
 import 'package:islamic/tabs/hadeath/hadeath.dart';
 import 'package:islamic/tabs/hadeath/hadeath_details_screen.dart';
 
 class HadeathTab extends StatefulWidget {
+  const HadeathTab({super.key});
+
   @override
   State<HadeathTab> createState() => _HadeathTabState();
 }
@@ -24,7 +24,7 @@ class _HadeathTabState extends State<HadeathTab> {
           height: MediaQuery.of(context).size.height * 0.24,
           width: 205,
         ),
-        SizedBox(
+        const SizedBox(
           height: 13,
         ),
         Expanded(

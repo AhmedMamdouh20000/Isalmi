@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:islamic/app_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class SettingsProvider extends ChangeNotifier {
   ThemeMode themeMode = ThemeMode.dark;

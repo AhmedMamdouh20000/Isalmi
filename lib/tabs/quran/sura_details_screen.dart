@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islamic/app_theme.dart';
@@ -10,6 +7,8 @@ import 'package:provider/provider.dart';
 
 class SuraDetailsScreen extends StatefulWidget {
   static const String routeName = '/sura-details';
+
+  const SuraDetailsScreen({super.key});
 
   @override
   State<SuraDetailsScreen> createState() => _SuraDetailsScreenState();
@@ -50,7 +49,7 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
           ),
         ),
         body: Container(
-          padding: EdgeInsets.all(24),
+          padding: const EdgeInsets.all(24),
           margin: EdgeInsets.symmetric(
               vertical: MediaQuery.of(context).size.height * 0.1,
               horizontal: MediaQuery.of(context).size.width * 0.07),
@@ -62,12 +61,41 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
             borderRadius: BorderRadius.circular(30),
           ),
           child: ayat.isEmpty
-              ? Center(child: CircularProgressIndicator())
+              ? const Center(child: CircularProgressIndicator())
               : ListView.builder(
-                  itemBuilder: (_, index) => Text(
-                    ayat[index],
-                    style: Theme.of(context).textTheme.titleLarge,
-                    textAlign: TextAlign.center,
+                  itemBuilder: (_, index) => Row(
+                    children: [
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Image.asset(
+                            "assets/images/arabic_art.png",
+                            height: MediaQuery.of(context).size.height * 0.1,
+                            width: MediaQuery.of(context).size.width * 0.1,
+                          ),
+                          Positioned(
+                            top: MediaQuery.of(context).size.height * 0.04,
+                            child: Text(
+                              textAlign: TextAlign.center,
+                              "${index + 1}".toString(),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge
+                                  ?.copyWith(fontSize: 17,
+                                color: settingsProvider.themeMode == ThemeMode.light ? AppTheme.darkPrimary:AppTheme.lightPrimary,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Expanded(
+                        child: Text(
+                          ayat[index],
+                          style: Theme.of(context).textTheme.titleLarge,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
                   ),
                   itemCount: ayat.length,
                 ),

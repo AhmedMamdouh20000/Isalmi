@@ -6,7 +6,8 @@
     "radio":"Radio",
     "settings":"Settings",
     "language":"Language",
-    "dark_mode" : "Dark Mode"
-    
-    
+    "dark_mode" : "Dark Mode",
+    "aya" : "aya",
+    "ayat" : "ayat",
+    "tasbeh": "Number of Tasbeh"
 }

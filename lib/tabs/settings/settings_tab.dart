@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:islamic/app_theme.dart';
 import 'package:islamic/tabs/settings/settings.dart';
@@ -6,11 +5,16 @@ import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsTab extends StatelessWidget {
+  const SettingsTab({super.key});
+
   @override
   Widget build(BuildContext context) {
     SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     return Column(
       children: [
+        SizedBox(
+          height: MediaQuery.of(context).size.height*0.07,
+        ),
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(
@@ -22,7 +26,7 @@ class SettingsTab extends StatelessWidget {
                     .headlineSmall!
                     .copyWith(fontWeight: FontWeight.w500),
               ),
-              Spacer(),
+              const Spacer(),
               Switch(
                 value: settingsProvider.themeMode == ThemeMode.dark,
                 onChanged: (value) => settingsProvider

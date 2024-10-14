@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -10,7 +9,7 @@ class AppTheme {
   static const Color gold = Color(0xffFACC1D);
   static ThemeData lightTheme = ThemeData(
     primaryColor: lightPrimary,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       foregroundColor: black,
       titleTextStyle: TextStyle(
         color: black,
@@ -21,16 +20,16 @@ class AppTheme {
       backgroundColor: Colors.transparent,
     ),
     scaffoldBackgroundColor: Colors.transparent,
-    switchTheme: SwitchThemeData(
+    switchTheme: const SwitchThemeData(
       trackColor: WidgetStatePropertyAll(lightPrimary),
     ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: lightPrimary,
       type: BottomNavigationBarType.fixed,
       selectedItemColor: black,
       unselectedItemColor: white,
     ),
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       headlineSmall: TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.w400,
@@ -45,7 +44,7 @@ class AppTheme {
   );
   static ThemeData darkTheme = ThemeData(
     primaryColor: darkPrimary,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       foregroundColor: gold,
       titleTextStyle: TextStyle(
         color: white,
@@ -56,16 +55,16 @@ class AppTheme {
       backgroundColor: Colors.transparent,
     ),
     scaffoldBackgroundColor: Colors.transparent,
-    switchTheme: SwitchThemeData(
+    switchTheme: const SwitchThemeData(
       thumbColor: WidgetStatePropertyAll(white),
     ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: darkPrimary,
       type: BottomNavigationBarType.fixed,
       selectedItemColor: gold,
       unselectedItemColor: white,
     ),
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       headlineSmall: TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.w400,

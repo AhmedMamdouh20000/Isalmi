@@ -3,10 +3,11 @@ import 'package:islamic/app_theme.dart';
 import 'package:islamic/tabs/hadeath/hadeath.dart';
 import 'package:islamic/tabs/settings/settings.dart';
 import 'package:provider/provider.dart';
-import 'package:provider/provider.dart';
 
 class HadeathDetailsScreen extends StatelessWidget {
   static const String routeName = 'hadeath-details';
+
+  const HadeathDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class HadeathDetailsScreen extends StatelessWidget {
           title: Text(hadeath.title),
         ),
         body: Container(
-          padding: EdgeInsets.all(24),
+          padding: const EdgeInsets.all(24),
           margin: EdgeInsets.symmetric(
               vertical: MediaQuery.of(context).size.height * 0.1,
               horizontal: MediaQuery.of(context).size.width * 0.07),

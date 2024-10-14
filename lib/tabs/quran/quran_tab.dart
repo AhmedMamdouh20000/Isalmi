@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:islamic/app_theme.dart';
+import 'package:islamic/tabs/quran/custom_quraan.dart';
 import 'package:islamic/tabs/quran/sura_details_screen.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class QuranTab extends StatelessWidget {
+class QuranTab extends StatefulWidget {
+  const QuranTab({super.key});
+
+  @override
+  State<QuranTab> createState() => _QuranTabState();
+}
+
+class _QuranTabState extends State<QuranTab> {
   List<String> suraNames = [
     "الفاتحه",
     "البقرة",
@@ -121,64 +127,84 @@ class QuranTab extends StatelessWidget {
     "الفلق",
     "الناس"
   ];
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.asset(
-          'assets/images/qur2an_screen_logo.png',
-          height: MediaQuery.of(context).size.height * 0.24,
-          width: 205,
+        Expanded(
+          child: Image.asset(
+            'assets/images/kabba.png',
+            height: MediaQuery
+                .of(context)
+                .size
+                .height * 0.24,
+            width: 205,
+          ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 13,
-        ),
-        Container(
-          height: 3,
-          decoration: BoxDecoration(
-            color: AppTheme.lightPrimary,
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-        Text(
-          'اسماء الصور',
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        Container(
-          height: 3,
-          decoration: BoxDecoration(
-            color: AppTheme.lightPrimary,
-            borderRadius: BorderRadius.circular(10),
-          ),
         ),
         Expanded(
           child: ListView.separated(
-            cacheExtent: 100,
-            separatorBuilder: (_, index) => Container(
-              height: 10,
-            ),
-            itemBuilder: (_, index) => Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                InkWell(
-                  onTap: () => Navigator.of(context).pushNamed(
-                    SuraDetailsScreen.routeName,
-                    arguments: SuraDetailsArgs(
-                      suraName: suraNames[index],
-                      index: index,
-                    ),
-                  ),
-                  child: Text(
-                    suraNames[index],
-                    style: Theme.of(context).textTheme.headlineSmall,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
-            ),
-            itemCount: suraNames.length,
-          ),
+              itemBuilder: (_, index) => CustomQuraan(index: index),
+              separatorBuilder: (_, index) =>
+                   const SizedBox(
+                    height: 13,
+                  ), itemCount: CustomQuraan.suraNamesEnglish.length),
         ),
+        // Container(
+        //   height: 3,
+        //   decoration: BoxDecoration(
+        //     color: AppTheme.lightPrimary,
+        //     borderRadius: BorderRadius.circular(10),
+        //   ),
+        // ),
+        // Text(
+        //   'اسماء السور',
+        //   style: Theme.of(context).textTheme.titleLarge,
+        // ),
+        // Container(
+        //   height: 3,
+        //   decoration: BoxDecoration(
+        //     color: AppTheme.lightPrimary,
+        //     borderRadius: BorderRadius.circular(10),
+        //   ),
+        // ),
+        // Expanded(
+        //   child: ListView.separated(
+        //     cacheExtent: 100,
+        //     separatorBuilder: (_, index) => Container(
+        //       height: 10,
+        //     ),
+        //     itemBuilder: (_, index) => Row(
+        //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //       children: [
+        //         InkWell(
+        //           onTap: () => Navigator.of(context).pushNamed(
+        //             SuraDetailsScreen.routeName,
+        //             arguments: SuraDetailsArgs(
+        //               suraName: suraNames[index],
+        //               index: index,
+        //             ),
+        //           ),
+        //           child: Container(
+        //             decoration: BoxDecoration(
+        //               color: Colors.transparent,
+        //               borderRadius: BorderRadius.circular(10),
+        //             ),
+        //             child: Text(
+        //               'سورة : ${suraNames[index]} ',
+        //               style: Theme.of(context).textTheme.headlineSmall,
+        //               textAlign: TextAlign.center,
+        //             ),
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //     itemCount: suraNames.length,
+        //   ),
+        // ),
       ],
     );
   }

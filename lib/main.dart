@@ -7,7 +7,6 @@ import 'package:islamic/tabs/hadeath/hadeath_details_screen.dart';
 import 'package:islamic/tabs/quran/sura_details_screen.dart';
 import 'package:islamic/tabs/settings/settings.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,12 +14,14 @@ void main() {
   runApp(
     ChangeNotifierProvider(
       create: (_) => SettingsProvider(),
-      child: IslamiApp(),
+      child: const IslamiApp(),
     ),
   );
 }
 
 class IslamiApp extends StatefulWidget {
+  const IslamiApp({super.key});
+
   @override
   State<IslamiApp> createState() => _IslamiAppState();
 }
@@ -33,9 +34,9 @@ class _IslamiAppState extends State<IslamiApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        HomeScren.routeName: (_) => HomeScren(),
-        SuraDetailsScreen.routeName: (_) => SuraDetailsScreen(),
-        HadeathDetailsScreen.routeName: (_) => HadeathDetailsScreen(),
+        HomeScren.routeName: (_) => const HomeScren(),
+        SuraDetailsScreen.routeName: (_) => const SuraDetailsScreen(),
+        HadeathDetailsScreen.routeName: (_) => const HadeathDetailsScreen(),
       },
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
